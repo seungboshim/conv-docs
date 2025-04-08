@@ -4,28 +4,28 @@ import { getAllRules, getRuleById } from '@/lib/markdown-utils';
 import { notFound } from 'next/navigation';
 
 interface RuleDetailPageProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
 export async function generateStaticParams() {
   const rules = await getAllRules();
-  
-  return rules.map((rule) => ({
+
+  return rules.map(rule => ({
     slug: rule.id,
   }));
 }
 
 export default async function RuleDetailPage({ params }: RuleDetailPageProps) {
-  const { slug } = params;
+  const { slug } = await params;
   const rules = await getAllRules();
   const rule = await getRuleById(slug);
-  
+
   if (!rule) {
     notFound();
   }
-  
+
   return (
     <MainLayout rules={rules} currentRuleId={slug}>
       <article className="max-w-4xl mx-auto">
@@ -33,7 +33,7 @@ export default async function RuleDetailPage({ params }: RuleDetailPageProps) {
           <h1 className="text-3xl font-bold text-gray-dark">{rule.title}</h1>
           <p className="text-lg text-gray-light mt-2">{rule.description}</p>
         </header>
-        
+
         <MarkdownViewer content={rule.content} />
       </article>
     </MainLayout>
