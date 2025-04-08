@@ -9,11 +9,11 @@ export default async function Home() {
   return (
     <MainLayout rules={rules}>
       <section className="max-w-4xl mx-auto">
-        <h1 className="text-4xl font-bold text-gray-dark mb-6">코딩 규칙 문서</h1>
+        <h1 className="text-4xl font-bold text-gray-dark mb-6">Conv.docs</h1>
 
         <p className="text-lg text-gray-light mb-8">
-          이 사이트는 프로젝트의 코딩 규칙을 문서화하여 제공합니다. 코드 일관성 유지와 협업 향상을
-          목표로 다양한 코딩 규칙과 모범 사례를 제공합니다.
+          다양한 코딩 컨벤션을 제공하는 문서입니다.
+          <br /> 본 프로젝트 또한 해당 컨벤션을 준수하며 개발되었습니다.
         </p>
 
         <h2 className="text-2xl font-bold text-gray-dark mt-12 mb-4">주요 규칙 목록</h2>
@@ -31,22 +31,6 @@ export default async function Home() {
               </Link>
             </div>
           ))}
-        </div>
-
-        <h2 className="text-2xl font-bold text-gray-dark mt-12 mb-4">규칙 사용 방법</h2>
-
-        <div className="prose prose-gray max-w-none">
-          <p>
-            좌측 사이드바 메뉴에서 원하는 규칙을 선택하여 자세한 내용을 확인할 수 있습니다. 각
-            규칙은 관련된 다른 규칙을 참조하고 있어, 전체적인 코딩 스타일을 이해하는 데 도움이
-            됩니다.
-          </p>
-
-          <p className="mt-4">
-            이 문서는 프로젝트의 코딩 표준을 정의하고, 일관된 코드 작성을 돕기 위한 가이드라인으로
-            활용할 수 있습니다. 모든 팀원은 이 규칙을 참고하여 일관된 코드 품질을 유지하는 것이
-            좋습니다.
-          </p>
         </div>
       </section>
     </MainLayout>

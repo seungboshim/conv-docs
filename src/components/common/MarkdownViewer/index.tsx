@@ -3,6 +3,8 @@
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import { MarkdownViewerProps } from './types';
+import rehypeHighlight from 'rehype-highlight';
+import 'highlight.js/styles/tokyo-night-light.css';
 
 export const MarkdownViewer: React.FC<MarkdownViewerProps> = ({
   content,
@@ -12,6 +14,7 @@ export const MarkdownViewer: React.FC<MarkdownViewerProps> = ({
   return (
     <div className={`markdown-viewer prose prose-gray max-w-none ${className}`} {...props}>
       <ReactMarkdown
+        rehypePlugins={[rehypeHighlight]}
         components={{
           h1: props => <h1 className="text-3xl font-bold mt-8 mb-4 text-gray-dark" {...props} />,
           h2: props => (
@@ -37,9 +40,11 @@ export const MarkdownViewer: React.FC<MarkdownViewerProps> = ({
             const { className, children } = props;
             const isInline = !className || !className.startsWith('language-');
             return isInline ? (
-              <code className="bg-bg-light px-1 py-0.5 rounded text-primary">{children}</code>
+              <code className="bg-bg-light px-1 py-0.5 rounded text-primary text-sm">
+                {children}
+              </code>
             ) : (
-              <code className="block bg-bg-light p-4 rounded text-gray-dark overflow-x-auto my-4">
+              <code className="block bg-gray-dark p-4 rounded overflow-x-auto my-4 text-sm">
                 {children}
               </code>
             );
