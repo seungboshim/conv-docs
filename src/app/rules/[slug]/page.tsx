@@ -29,11 +29,6 @@ export default async function RuleDetailPage({ params }: RuleDetailPageProps) {
   return (
     <MainLayout rules={rules} currentRuleId={slug}>
       <article className="max-w-4xl mx-auto">
-        <header className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-dark">{rule.title}</h1>
-          <p className="text-lg text-gray-light mt-2">{rule.description}</p>
-        </header>
-
         <MarkdownViewer content={rule.content} />
       </article>
     </MainLayout>
