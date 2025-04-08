@@ -25,7 +25,7 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <div className="min-h-screen bg-white">{children}</div>
+        <div className="min-h-screen bg-white tracking-tight">{children}</div>
       </body>
     </html>
   );

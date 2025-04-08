@@ -1,7 +1,7 @@
-import { MainLayout } from '@/app/components/layout/MainLayout';
-import { MarkdownViewer } from '@/app/components/common/MarkdownViewer';
-import { getAllRules, getRuleById } from '@/lib/markdown-utils';
 import { notFound } from 'next/navigation';
+import { MainLayout } from '@/components/layout';
+import { MarkdownViewer } from '@/components/common';
+import { getAllRules, getRuleById } from '@/business/services';
 
 interface RuleDetailPageProps {
   params: Promise<{
