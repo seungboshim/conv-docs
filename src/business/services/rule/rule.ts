@@ -27,7 +27,41 @@ export async function getRuleById(id: string): Promise<Rule | null> {
 // 마크다운 파일 내용 가져오기
 function getRuleContentById(id: string): string {
   try {
-    const filePath = path.join(process.cwd(), 'src', 'data', 'markdown', `${id}.md`);
+    // 프론트엔드 규칙인지 백엔드 규칙인지 확인
+    const isFrontendRule = [
+      '01-directory-structure',
+      '02-naming-convention',
+      '03-coding-convention',
+      '04-api-fetching-architecture',
+      '05-performance-optimization',
+      '06-react-typescript-general',
+      '07-typescript-usage',
+    ].includes(id);
+
+    const isBackendRule = [
+      '01-general-principles',
+      '02-application-logic',
+      '03-entities',
+      '04-repositories',
+      '05-services',
+      '06-dtos',
+      '07-rest-controllers',
+      '08-api-response',
+      '09-global-exception-handler',
+      '10-java-spring-best-practices',
+    ].includes(id);
+
+    let filePath;
+
+    if (isFrontendRule) {
+      filePath = path.join(process.cwd(), 'src', 'data', 'frontend', `${id}.md`);
+    } else if (isBackendRule) {
+      filePath = path.join(process.cwd(), 'src', 'data', 'backend', `${id}.md`);
+    } else {
+      // 알 수 없는 규칙 유형
+      return `# ${ruleMetadata[id].title}\n\n${ruleMetadata[id].description}\n\n(내용 준비 중...)`;
+    }
+
     if (fs.existsSync(filePath)) {
       return fs.readFileSync(filePath, 'utf8');
     }

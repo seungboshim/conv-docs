@@ -1,80 +1,108 @@
-"use client";
+'use client';
 
-import React from 'react';
+import React, { MouseEvent } from 'react';
 import Link from 'next/link';
 import { SidebarProps } from './types';
+import { frontendRuleIds, backendRuleIds } from '@/utils/constants/rule';
 
 export const Sidebar: React.FC<SidebarProps> = ({
   rules,
   currentRuleId,
-  title = '코딩 규칙 문서',
-  isOpen = true,
+  title = 'Document Heading',
+  isOpen,
   onToggle,
-  className = '',
+  className,
   ...props
 }) => {
+  // 규칙을 프론트엔드와 백엔드로 필터링
+  const frontendRules = rules.filter(rule => frontendRuleIds.includes(rule.id));
+  const backendRules = rules.filter(rule => backendRuleIds.includes(rule.id));
+
+  const handleClose = (e: MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+    if (onToggle) onToggle();
+  };
+
   return (
-    <>
+    <div className={`sidebar-wrapper ${className || ''}`} {...props}>
       {/* 모바일 오버레이 */}
       {isOpen && (
-        <div 
-          className="fixed inset-0 bg-black/20 z-40 lg:hidden"
-          onClick={onToggle}
-          aria-hidden="true"
-        />
+        <>
+          <div
+            className="fixed inset-0 bg-black/20 z-40 lg:hidden"
+            onClick={handleClose}
+            aria-hidden="true"
+          />
+        </>
       )}
-      
+
       {/* 사이드바 */}
-      <nav
+      <div
         className={`
-          fixed top-0 left-0 bottom-0 
-          z-50 w-64 bg-white
-          transform transition-transform duration-300 ease-in-out
-          border-r border-gray-200
-          overflow-y-auto
-          ${isOpen ? 'translate-x-0' : '-translate-x-full'} 
-          lg:translate-x-0 lg:static lg:z-0
-          ${className}
+          fixed z-50 inset-y-0 left-0 w-72 bg-white border-r border-gray-200
+          transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:z-auto
+          ${isOpen ? 'translate-x-0' : '-translate-x-full'}
         `}
-        {...props}
       >
-        <div className="px-4 py-6">
-          <h1 className="text-xl font-bold text-gray-dark mb-8">{title}</h1>
-          
-          <div className="space-y-1">
-            <Link
-              href="/"
-              className={`
-                block px-3 py-2 rounded-md text-base font-medium
-                ${!currentRuleId ? 'bg-primary text-white' : 'text-gray-dark hover:bg-bg-light'}
-              `}
-            >
-              홈
+        <div className="overflow-y-auto h-full py-5 px-4">
+          <div className="flex items-center justify-between mb-6">
+            <Link href="/" className="text-xl font-bold text-primary">
+              {title}
             </Link>
-            
-            <h2 className="text-xs font-semibold text-gray-light uppercase tracking-wider mt-6 mb-2 px-3">
-              규칙 문서
-            </h2>
-            
-            {rules.map((rule) => (
-              <Link
-                key={rule.id}
-                href={`/rules/${rule.id}`}
-                className={`
-                  block px-3 py-2 rounded-md text-base font-medium
-                  ${currentRuleId === rule.id 
-                    ? 'bg-primary text-white' 
-                    : 'text-gray-dark hover:bg-bg-light'}
-                `}
-              >
-                {rule.title}
-              </Link>
-            ))}
           </div>
+
+          {/* 규칙 목록 */}
+          {rules && rules.length > 0 && (
+            <>
+              <div className="mt-5">
+                <h3 className="text-xs font-semibold text-slate-500 tracking-wide uppercase">
+                  FRONTEND
+                </h3>
+                <div className="mt-2 -mx-3">
+                  {frontendRules.map(rule => {
+                    const isActive = rule.id === currentRuleId;
+                    return (
+                      <Link
+                        key={rule.id}
+                        href={`/rules/${rule.id}`}
+                        className={`px-3 py-2 transition-colors duration-200 relative block ${
+                          isActive ? 'text-primary' : 'hover:text-slate-900'
+                        }`}
+                      >
+                        <span>{rule.title}</span>
+                      </Link>
+                    );
+                  })}
+                </div>
+              </div>
+
+              <div className="mt-5">
+                <h3 className="text-xs font-semibold text-slate-500 tracking-wide uppercase">
+                  BACKEND
+                </h3>
+                <div className="mt-2 -mx-3">
+                  {backendRules.map(rule => {
+                    const isActive = rule.id === currentRuleId;
+                    return (
+                      <Link
+                        key={rule.id}
+                        href={`/rules/${rule.id}`}
+                        className={`px-3 py-2 transition-colors duration-200 relative block ${
+                          isActive ? 'text-primary' : 'hover:text-slate-900'
+                        }`}
+                      >
+                        <span>{rule.title}</span>
+                      </Link>
+                    );
+                  })}
+                </div>
+              </div>
+            </>
+          )}
         </div>
-      </nav>
-    </>
+      </div>
+    </div>
   );
 };
 
-Sidebar.displayName = 'Sidebar'; 
+export default Sidebar;

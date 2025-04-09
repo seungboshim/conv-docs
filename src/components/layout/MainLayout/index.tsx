@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import React, { useState } from 'react';
 import { Sidebar } from '../Sidebar';
@@ -12,21 +12,22 @@ export const MainLayout: React.FC<MainLayoutProps> = ({
   ...props
 }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  
+
   const toggleSidebar = () => {
     setIsSidebarOpen(prev => !prev);
   };
-  
+
   return (
     <div className="flex min-h-screen bg-white" {...props}>
       {/* 사이드바 */}
-      <Sidebar 
-        rules={rules} 
-        currentRuleId={currentRuleId} 
+      <Sidebar
+        title="Conv.docs"
+        rules={rules}
+        currentRuleId={currentRuleId}
         isOpen={isSidebarOpen}
         onToggle={toggleSidebar}
       />
-      
+
       {/* 메인 콘텐츠 영역 */}
       <main className="flex-1 overflow-auto">
         {/* 모바일 헤더 */}
@@ -52,16 +53,14 @@ export const MainLayout: React.FC<MainLayoutProps> = ({
               />
             </svg>
           </button>
-          <h1 className="ml-4 text-lg font-medium text-gray-dark">코딩 규칙 문서</h1>
+          <h1 className="ml-4 text-lg font-medium text-gray-dark">Conv.docs</h1>
         </div>
-        
+
         {/* 실제 콘텐츠 */}
-        <div className={`p-6 lg:px-8 lg:py-10 ${className}`}>
-          {children}
-        </div>
+        <div className={`p-6 lg:px-8 lg:py-10 ${className}`}>{children}</div>
       </main>
     </div>
   );
 };
 
-MainLayout.displayName = 'MainLayout'; 
+MainLayout.displayName = 'MainLayout';
