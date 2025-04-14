@@ -1,9 +1,10 @@
 'use client';
 
-import React, { MouseEvent } from 'react';
+import { backendRuleIds, frontendRuleIds } from '@/utils/constants/rule';
 import Link from 'next/link';
-import { SidebarProps } from './types';
-import { frontendRuleIds, backendRuleIds } from '@/utils/constants/rule';
+import type React from 'react';
+import type { MouseEvent } from 'react';
+import type { SidebarProps } from './types';
 
 export const Sidebar: React.FC<SidebarProps> = ({
   rules,
@@ -27,13 +28,11 @@ export const Sidebar: React.FC<SidebarProps> = ({
     <div className={`sidebar-wrapper ${className || ''}`} {...props}>
       {/* 모바일 오버레이 */}
       {isOpen && (
-        <>
-          <div
-            className="fixed inset-0 bg-black/20 z-40 lg:hidden"
-            onClick={handleClose}
-            aria-hidden="true"
-          />
-        </>
+        <div
+          className="fixed inset-0 bg-black/20 z-40 lg:hidden"
+          onClick={handleClose}
+          aria-hidden="true"
+        />
       )}
 
       {/* 사이드바 */}

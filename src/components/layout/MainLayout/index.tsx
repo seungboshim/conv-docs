@@ -1,8 +1,9 @@
 'use client';
 
-import React, { useState } from 'react';
+import type React from 'react';
+import { useState } from 'react';
 import { Sidebar } from '../Sidebar';
-import { MainLayoutProps } from './types';
+import type { MainLayoutProps } from './types';
 
 export const MainLayout: React.FC<MainLayoutProps> = ({
   children,

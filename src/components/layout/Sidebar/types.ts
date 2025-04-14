@@ -1,5 +1,5 @@
-import { HTMLAttributes } from 'react';
-import { Rule } from '@/types/rule';
+import type { HTMLAttributes } from 'react';
+import type { Rule } from '@/types/rule';
 
 export interface SidebarProps extends HTMLAttributes<HTMLElement> {
   /**

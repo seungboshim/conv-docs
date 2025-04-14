@@ -1,5 +1,5 @@
-import { HTMLAttributes, ReactNode } from 'react';
-import { Rule } from '@/types/rule';
+import type { Rule } from '@/types/rule';
+import type { HTMLAttributes, ReactNode } from 'react';
 
 export interface MainLayoutProps extends HTMLAttributes<HTMLDivElement> {
   /**

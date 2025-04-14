@@ -1,0 +1,62 @@
+{
+  "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
+  "vcs": { "enabled": false, "clientKind": "git", "useIgnoreFile": false },
+  "files": {
+    "ignoreUnknown": false,
+    "ignore": [
+      "node_modules",
+      ".next",
+      ".cursor",
+      "dist",
+      "out",
+      "build",
+      "package-lock.json",
+      "yarn.lock",
+      "pnpm-lock.yaml",
+      "*.log*",
+      ".env*",
+      ".git",
+      ".DS_Store",
+      ".eslintcache",
+      ".tsbuildinfo",
+      "*.tsbuildinfo",
+      "public"
+    ]
+  },
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "tab",
+    "indentWidth": 2,
+    "lineWidth": 100,
+    "attributePosition": "multiline"
+  },
+  "organizeImports": {
+    "enabled": true
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "style": {
+        "noNonNullAssertion": "off"
+      },
+      "a11y": {
+        "useKeyWithClickEvents": "off",
+        "noSvgWithoutTitle": "off"
+      }
+    }
+  },
+  "javascript": {
+    "formatter": {
+      "quoteStyle": "single",
+      "trailingCommas": "es5",
+      "semicolons": "always",
+      "attributePosition": "multiline"
+    }
+  },
+  "overrides": [
+    {
+      "include": ["**/app/**/page.{js,jsx,ts,tsx}", "**/app/**/layout.{js,jsx,ts,tsx}"],
+      "linter": { "rules": { "suspicious": { "useAwait": "error" } } }
+    }
+  ]
+}

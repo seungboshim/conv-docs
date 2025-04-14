@@ -1,7 +1,7 @@
-import fs from 'fs';
-import path from 'path';
+import fs from 'node:fs';
+import path from 'node:path';
+import type { Rule } from '@/types/rule';
 import { ruleIds, ruleMetadata } from '@/utils/constants';
-import { Rule } from '@/types/rule';
 
 // 모든 규칙 가져오기
 export async function getAllRules(): Promise<Rule[]> {
@@ -51,7 +51,7 @@ function getRuleContentById(id: string): string {
       '10-java-spring-best-practices',
     ].includes(id);
 
-    let filePath;
+    let filePath: string;
 
     if (isFrontendRule) {
       filePath = path.join(process.cwd(), 'src', 'data', 'frontend', `${id}.md`);

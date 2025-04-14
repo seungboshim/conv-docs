@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "format": "biome format --write .",
+    "lint": "biome lint --write ."
   },
   "dependencies": {
     "highlight.js": "^11.11.1",
@@ -17,6 +18,7 @@
     "rehype-highlight": "^7.0.2"
   },
   "devDependencies": {
+    "@biomejs/biome": "1.9.4",
     "@eslint/eslintrc": "^3",
     "@eslint/js": "^9.24.0",
     "@tailwindcss/postcss": "^4",

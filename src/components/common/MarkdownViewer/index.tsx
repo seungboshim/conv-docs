@@ -1,9 +1,9 @@
 'use client';
 
-import React from 'react';
+import type React from 'react';
 import ReactMarkdown from 'react-markdown';
-import { MarkdownViewerProps } from './types';
 import rehypeHighlight from 'rehype-highlight';
+import type { MarkdownViewerProps } from './types';
 import 'highlight.js/styles/tokyo-night-light.css';
 
 export const MarkdownViewer: React.FC<MarkdownViewerProps> = ({
@@ -56,7 +56,15 @@ export const MarkdownViewer: React.FC<MarkdownViewerProps> = ({
           tr: props => <tr className="border-b border-gray-200" {...props} />,
           th: props => <th className="px-4 py-2 text-left font-bold" {...props} />,
           td: props => <td className="px-4 py-2 border-gray-200" {...props} />,
-          img: props => <img className="max-w-full h-auto my-4" {...props} />,
+          img: props => {
+            return (
+              <img
+                {...props}
+                alt={props.alt || '마크다운 이미지'}
+                className="max-w-full h-auto my-4"
+              />
+            );
+          },
           hr: props => <hr className="my-6 border-gray-200" {...props} />,
         }}
       >
